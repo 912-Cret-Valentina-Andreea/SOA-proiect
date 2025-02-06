@@ -1,0 +1,11 @@
+<a class="link" routerLink="/books">Go to Books</a>
+
+<div class="notification-list">
+  <h2>Notifications</h2>
+  <div class="notification-container">
+    <div class="notification-tile" *ngFor="let notification of notifications">
+      <h3>{{ notification.title }}</h3>
+      <p>{{ getStatus(notification) }}</p>
+    </div>
+  </div>
+</div>

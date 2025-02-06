@@ -1,0 +1,195 @@
+---
+openapi: 3.0.3
+servers:
+  - url: /api/library
+info:
+  title: Shop API
+  version: '1.0.0'
+tags:
+  - name: Book, User
+paths:
+  /register:
+    post:
+      tags:
+        - User
+      operationId: register
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/RegisterRequest"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RegisterResponse"
+  /login:
+    post:
+      tags:
+        - User
+      operationId: login
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/LoginRequest"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/LoginResponse"
+
+  /books:
+    get:
+      tags:
+        - Book
+      operationId: getAllBooks
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Book'
+
+  /notifications:
+    get:
+      tags:
+        - Book
+      operationId: getAllNotifications
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Notification'
+
+  /statistics:
+    get:
+      tags:
+        - Book
+      operationId: getAllStatistics
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Statistics'
+
+  /borrow/{name}:
+    post:
+      parameters:
+        - name: name
+          in: path
+          required: true
+          schema:
+            type: string
+      tags:
+        - Book
+      operationId: borrowBook
+      responses:
+        "200":
+          description: OK
+
+  /return/{name}:
+    post:
+      parameters:
+        - name: name
+          in: path
+          required: true
+          schema:
+            type: string
+      tags:
+        - Book
+      operationId: returnBook
+      responses:
+        "200":
+          description: OK
+
+components:
+  schemas:
+    RegisterRequest:
+      required:
+        - email
+        - password
+        - name
+      type: object
+      properties:
+        email:
+          type: string
+        password:
+          type: string
+        name:
+          type: string
+    RegisterResponse:
+      required:
+        - token
+      type: object
+      properties:
+        token:
+          type: string
+    LoginRequest:
+      required:
+        - email
+        - password
+      type: object
+      properties:
+        email:
+          type: string
+        password:
+          type: string
+    LoginResponse:
+      required:
+        - token
+      type: object
+      properties:
+        token:
+          type: string
+
+
+    Book:
+      required:
+        - title
+        - author
+        - status
+      type: object
+      properties:
+        title:
+          type: string
+        author:
+          type: string
+        status:
+          type: boolean
+
+
+    Notification:
+      required:
+        - title
+        - status
+      properties:
+        title:
+          type: string
+        status:
+          type: boolean
+
+    Statistics:
+      required:
+        - title
+        - noReadings
+      properties:
+        title:
+          type: string
+        noReadings:
+          type: int

@@ -1,0 +1,17 @@
+{
+  "/api/library/register": {
+    "target": "http://localhost:8081",
+    "secure": false,
+    "logLevel": "debug"
+  },
+  "/api/library/login": {
+    "target": "http://localhost:8081",
+    "secure": false,
+    "logLevel": "debug"
+  },
+  "/api/library": {
+    "target": "http://localhost:8082",
+    "secure": false,
+    "logLevel": "debug"
+  }
+}

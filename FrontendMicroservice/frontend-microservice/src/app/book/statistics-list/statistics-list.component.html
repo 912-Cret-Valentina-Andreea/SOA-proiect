@@ -1,0 +1,11 @@
+<a class="link" routerLink="/books">Go to Books</a>
+
+<div class="statistics-list">
+  <h2>Statistics</h2>
+  <div class="statistics-container">
+    <div class="statistics-tile" *ngFor="let stat of statistics">
+      <h3>{{ stat.title }}</h3>
+      <p>Number of Readings: {{ stat.noReadings }}</p>
+    </div>
+  </div>
+</div>
